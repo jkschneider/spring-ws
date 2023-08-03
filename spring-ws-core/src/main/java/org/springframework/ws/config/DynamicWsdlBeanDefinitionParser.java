@@ -78,7 +78,10 @@ class DynamicWsdlBeanDefinitionParser extends AbstractBeanDefinitionParser {
 		} else {
 			if (schemas.size() > 1) {
 				throw new IllegalArgumentException(
-						"Multiple <xsd/> elements requires Commons XMLSchema." + "Please put Commons XMLSchema on the classpath.");
+						"""
+                        Multiple <xsd/> elements requires Commons XMLSchema.\
+                        Please put Commons XMLSchema on the classpath.\
+                        """);
 			}
 			RootBeanDefinition schemaDef = createBeanDefinition(SimpleXsdSchema.class, source);
 			Element schema = schemas.iterator().next();

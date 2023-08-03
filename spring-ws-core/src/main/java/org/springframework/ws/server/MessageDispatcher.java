@@ -348,8 +348,8 @@ public class MessageDispatcher implements WebServiceMessageReceiver, BeanNameAwa
 				&& !ObjectUtils.isEmpty(mappedEndpoint.getInterceptors())) {
 			boolean hasFault = false;
 			WebServiceMessage response = messageContext.getResponse();
-			if (response instanceof FaultAwareWebServiceMessage) {
-				hasFault = ((FaultAwareWebServiceMessage) response).hasFault();
+			if (response instanceof FaultAwareWebServiceMessage message) {
+				hasFault = message.hasFault();
 			}
 			boolean resume = true;
 			for (int i = interceptorIndex; resume && i >= 0; i--) {

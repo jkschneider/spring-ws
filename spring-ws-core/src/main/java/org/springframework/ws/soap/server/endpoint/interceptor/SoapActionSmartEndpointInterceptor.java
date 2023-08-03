@@ -41,8 +41,8 @@ public class SoapActionSmartEndpointInterceptor extends DelegatingSmartSoapEndpo
 
 	@Override
 	protected boolean shouldIntercept(WebServiceMessage request, Object endpoint) {
-		if (request instanceof SoapMessage) {
-			String soapAction = ((SoapMessage) request).getSoapAction();
+		if (request instanceof SoapMessage message) {
+			String soapAction = message.getSoapAction();
 			if (StringUtils.hasLength(soapAction) && soapAction.charAt(0) == '"'
 					&& soapAction.charAt(soapAction.length() - 1) == '"') {
 				soapAction = soapAction.substring(1, soapAction.length() - 1);

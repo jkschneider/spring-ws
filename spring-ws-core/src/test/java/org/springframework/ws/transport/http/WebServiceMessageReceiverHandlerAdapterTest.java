@@ -39,11 +39,17 @@ import org.springframework.ws.transport.WebServiceMessageReceiver;
 
 public class WebServiceMessageReceiverHandlerAdapterTest {
 
-	private static final String REQUEST = " <SOAP-ENV:Envelope\n"
-			+ "  xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"\n"
-			+ "  SOAP-ENV:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n" + "	  <SOAP-ENV:Body>\n"
-			+ "		<m:GetLastTradePrice xmlns:m=\"Some-URI\">\n" + "			<symbol>DIS</symbol>\n"
-			+ "		</m:GetLastTradePrice>\n" + "	</SOAP-ENV:Body>\n" + "</SOAP-ENV:Envelope>";
+	private static final String REQUEST = """
+             <SOAP-ENV:Envelope
+              xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+              SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+            	  <SOAP-ENV:Body>
+            		<m:GetLastTradePrice xmlns:m="Some-URI">
+            			<symbol>DIS</symbol>
+            		</m:GetLastTradePrice>
+            	</SOAP-ENV:Body>
+            </SOAP-ENV:Envelope>\
+            """;
 
 	private WebServiceMessageReceiverHandlerAdapter adapter;
 

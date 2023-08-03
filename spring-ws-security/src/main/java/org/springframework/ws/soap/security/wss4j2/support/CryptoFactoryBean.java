@@ -90,8 +90,7 @@ public class CryptoFactoryBean implements FactoryBean<Crypto>, InitializingBean 
 		try {
 			return resource.getFile().getAbsolutePath();
 		} catch (IOException ex) {
-			if (resource instanceof ClassPathResource) {
-				ClassPathResource classPathResource = (ClassPathResource) resource;
+			if (resource instanceof ClassPathResource classPathResource) {
 				return classPathResource.getPath();
 			} else {
 				throw ex;

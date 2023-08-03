@@ -100,7 +100,7 @@ class ChangelogCreator {
 
 		for (Object title : titles) {
 
-			String format = String.format("- #%s - %s", ids.next(), title.toString().replaceAll("`", ""));
+			String format = "- #%s - %s".formatted(ids.next(), title.toString().replaceAll("`", ""));
 			System.out.println(format.endsWith(".") ? format : format.concat("."));
 		}
 	}

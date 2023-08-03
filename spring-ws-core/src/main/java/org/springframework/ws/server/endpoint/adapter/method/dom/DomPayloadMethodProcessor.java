@@ -45,8 +45,8 @@ public class DomPayloadMethodProcessor extends AbstractPayloadSourceMethodProces
 
 	@Override
 	protected Node resolveRequestPayloadArgument(MethodParameter parameter, Source requestPayload) throws Exception {
-		if (requestPayload instanceof DOMSource) {
-			return resolveArgumentDomSource(parameter, (DOMSource) requestPayload);
+		if (requestPayload instanceof DOMSource source) {
+			return resolveArgumentDomSource(parameter, source);
 		} else {
 			DOMResult domResult = new DOMResult();
 			transform(requestPayload, domResult);
@@ -60,8 +60,7 @@ public class DomPayloadMethodProcessor extends AbstractPayloadSourceMethodProces
 		Node requestNode = requestSource.getNode();
 		if (parameterType.isAssignableFrom(requestNode.getClass())) {
 			return requestNode;
-		} else if (Element.class.equals(parameterType) && requestNode instanceof Document) {
-			Document document = (Document) requestNode;
+		} else if (Element.class.equals(parameterType) && requestNode instanceof Document document) {
 			return document.getDocumentElement();
 		}
 		// should not happen

@@ -112,8 +112,8 @@ public class MarshallingPayloadMethodProcessor extends AbstractPayloadMethodProc
 		Unmarshaller unmarshaller = getUnmarshaller();
 		if (unmarshaller == null) {
 			return false;
-		} else if (unmarshaller instanceof GenericUnmarshaller) {
-			return ((GenericUnmarshaller) unmarshaller).supports(parameter.getGenericParameterType());
+		} else if (unmarshaller instanceof GenericUnmarshaller genericUnmarshaller) {
+			return genericUnmarshaller.supports(parameter.getGenericParameterType());
 		} else {
 			return unmarshaller.supports(parameter.getParameterType());
 		}
@@ -137,8 +137,7 @@ public class MarshallingPayloadMethodProcessor extends AbstractPayloadMethodProc
 		Marshaller marshaller = getMarshaller();
 		if (marshaller == null) {
 			return false;
-		} else if (marshaller instanceof GenericMarshaller) {
-			GenericMarshaller genericMarshaller = (GenericMarshaller) marshaller;
+		} else if (marshaller instanceof GenericMarshaller genericMarshaller) {
 			return genericMarshaller.supports(returnType.getGenericParameterType());
 		} else {
 			return marshaller.supports(returnType.getParameterType());

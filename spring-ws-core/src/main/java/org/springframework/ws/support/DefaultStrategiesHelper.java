@@ -145,37 +145,34 @@ public class DefaultStrategiesHelper {
 	/** Instantiates the given bean, simulating the standard bean life cycle. */
 	private <T> T instantiateBean(Class<T> clazz, ApplicationContext applicationContext) {
 		T strategy = BeanUtils.instantiateClass(clazz);
-		if (strategy instanceof BeanNameAware) {
-			BeanNameAware beanNameAware = (BeanNameAware) strategy;
+		if (strategy instanceof BeanNameAware beanNameAware) {
 			beanNameAware.setBeanName(clazz.getName());
 		}
 		if (applicationContext != null) {
-			if (strategy instanceof BeanClassLoaderAware) {
-				((BeanClassLoaderAware) strategy).setBeanClassLoader(applicationContext.getClassLoader());
+			if (strategy instanceof BeanClassLoaderAware aware) {
+				aware.setBeanClassLoader(applicationContext.getClassLoader());
 			}
-			if (strategy instanceof BeanFactoryAware) {
-				((BeanFactoryAware) strategy).setBeanFactory(applicationContext);
+			if (strategy instanceof BeanFactoryAware aware) {
+				aware.setBeanFactory(applicationContext);
 			}
-			if (strategy instanceof ResourceLoaderAware) {
-				((ResourceLoaderAware) strategy).setResourceLoader(applicationContext);
+			if (strategy instanceof ResourceLoaderAware aware) {
+				aware.setResourceLoader(applicationContext);
 			}
-			if (strategy instanceof ApplicationEventPublisherAware) {
-				((ApplicationEventPublisherAware) strategy).setApplicationEventPublisher(applicationContext);
+			if (strategy instanceof ApplicationEventPublisherAware aware) {
+				aware.setApplicationEventPublisher(applicationContext);
 			}
-			if (strategy instanceof MessageSourceAware) {
-				((MessageSourceAware) strategy).setMessageSource(applicationContext);
+			if (strategy instanceof MessageSourceAware aware) {
+				aware.setMessageSource(applicationContext);
 			}
-			if (strategy instanceof ApplicationContextAware) {
-				ApplicationContextAware applicationContextAware = (ApplicationContextAware) strategy;
+			if (strategy instanceof ApplicationContextAware applicationContextAware) {
 				applicationContextAware.setApplicationContext(applicationContext);
 			}
-			if (applicationContext instanceof WebApplicationContext && strategy instanceof ServletContextAware) {
-				ServletContext servletContext = ((WebApplicationContext) applicationContext).getServletContext();
-				((ServletContextAware) strategy).setServletContext(servletContext);
+			if (applicationContext instanceof WebApplicationContext context && strategy instanceof ServletContextAware aware) {
+				ServletContext servletContext = context.getServletContext();
+				aware.setServletContext(servletContext);
 			}
 		}
-		if (strategy instanceof InitializingBean) {
-			InitializingBean initializingBean = (InitializingBean) strategy;
+		if (strategy instanceof InitializingBean initializingBean) {
 			try {
 				initializingBean.afterPropertiesSet();
 			} catch (Throwable ex) {

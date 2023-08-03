@@ -76,8 +76,10 @@ public abstract class AbstractMessageDispatcherServletInitializer extends Abstra
 		Assert.hasLength(servletName, "getServletName() may not return empty or null");
 
 		WebApplicationContext servletAppContext = this.createServletApplicationContext();
-		Assert.notNull(servletAppContext, "createServletApplicationContext() did not return an application "
-				+ "context for servlet [" + servletName + "]");
+		Assert.notNull(servletAppContext, """
+                createServletApplicationContext() did not return an application \
+                context for servlet [\
+                """ + servletName + "]");
 
 		MessageDispatcherServlet dispatcherServlet = new MessageDispatcherServlet(servletAppContext);
 		dispatcherServlet.setTransformWsdlLocations(isTransformWsdlLocations());

@@ -207,8 +207,8 @@ public class SaajSoapMessageFactory implements SoapMessageFactory, InitializingB
 	}
 
 	private SAXParseException getSAXParseException(Throwable ex) {
-		if (ex instanceof SAXParseException) {
-			return (SAXParseException) ex;
+		if (ex instanceof SAXParseException exception) {
+			return exception;
 		} else if (ex.getCause() != null) {
 			return getSAXParseException(ex.getCause());
 		} else {
@@ -218,8 +218,7 @@ public class SaajSoapMessageFactory implements SoapMessageFactory, InitializingB
 
 	private MimeHeaders parseMimeHeaders(InputStream inputStream) throws IOException {
 		MimeHeaders mimeHeaders = new MimeHeaders();
-		if (inputStream instanceof TransportInputStream) {
-			TransportInputStream transportInputStream = (TransportInputStream) inputStream;
+		if (inputStream instanceof TransportInputStream transportInputStream) {
 			for (Iterator<String> headerNames = transportInputStream.getHeaderNames(); headerNames.hasNext();) {
 				String headerName = headerNames.next();
 				for (Iterator<String> headerValues = transportInputStream.getHeaders(headerName); headerValues.hasNext();) {

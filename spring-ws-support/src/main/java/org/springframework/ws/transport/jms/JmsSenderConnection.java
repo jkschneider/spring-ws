@@ -183,10 +183,10 @@ public class JmsSenderConnection extends AbstractSenderConnection {
 
 	@Override
 	protected OutputStream getRequestOutputStream() throws IOException {
-		if (requestMessage instanceof BytesMessage) {
-			return new BytesMessageOutputStream((BytesMessage) requestMessage);
-		} else if (requestMessage instanceof TextMessage) {
-			return new TextMessageOutputStream((TextMessage) requestMessage, textMessageEncoding);
+		if (requestMessage instanceof BytesMessage message) {
+			return new BytesMessageOutputStream(message);
+		} else if (requestMessage instanceof TextMessage message) {
+			return new TextMessageOutputStream(message, textMessageEncoding);
 		} else {
 			throw new IllegalStateException("Unknown request message type [" + requestMessage + "]");
 		}
@@ -287,10 +287,10 @@ public class JmsSenderConnection extends AbstractSenderConnection {
 
 	@Override
 	protected InputStream getResponseInputStream() throws IOException {
-		if (responseMessage instanceof BytesMessage) {
-			return new BytesMessageInputStream((BytesMessage) responseMessage);
-		} else if (responseMessage instanceof TextMessage) {
-			return new TextMessageInputStream((TextMessage) responseMessage, textMessageEncoding);
+		if (responseMessage instanceof BytesMessage message) {
+			return new BytesMessageInputStream(message);
+		} else if (responseMessage instanceof TextMessage message) {
+			return new TextMessageInputStream(message, textMessageEncoding);
 		} else {
 			throw new IllegalStateException("Unknown response message type [" + responseMessage + "]");
 		}

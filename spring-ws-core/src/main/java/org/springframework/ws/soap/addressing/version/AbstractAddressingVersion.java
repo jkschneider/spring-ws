@@ -155,8 +155,7 @@ public abstract class AbstractAddressingVersion extends TransformerObjectSupport
 
 	private Element getSoapHeaderElement(SoapMessage message) {
 		Source source = message.getSoapHeader().getSource();
-		if (source instanceof DOMSource) {
-			DOMSource domSource = (DOMSource) source;
+		if (source instanceof DOMSource domSource) {
 			if (domSource.getNode() != null && domSource.getNode().getNodeType() == Node.ELEMENT_NODE) {
 				return (Element) domSource.getNode();
 			}

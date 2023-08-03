@@ -106,10 +106,9 @@ public abstract class JmsTransportUtils {
 			return null;
 		}
 		String destinationName;
-		if (destination instanceof Queue) {
-			destinationName = ((Queue) destination).getQueueName();
-		} else if (destination instanceof Topic) {
-			Topic topic = (Topic) destination;
+		if (destination instanceof Queue queue) {
+			destinationName = queue.getQueueName();
+		} else if (destination instanceof Topic topic) {
 			destinationName = topic.getTopicName();
 		} else {
 			throw new IllegalArgumentException("Destination [ " + destination + "] is neither Queue nor Topic");

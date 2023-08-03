@@ -106,9 +106,12 @@ public abstract class AbstractSoap11BodyTestCase extends AbstractSoapBodyTestCas
 		fault.setFaultActorOrRole(actor);
 
 		assertThat(fault.getFaultActorOrRole()).isEqualTo(actor);
-		assertPayloadEqual("<SOAP-ENV:Fault xmlns:SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/' "
-				+ "xmlns:spring='http://www.springframework.org'>" + "<faultcode>spring:fault</faultcode>"
-				+ "<faultstring xml:lang='en'>" + faultString + "</faultstring>" + "<faultactor>" + actor + "</faultactor>"
+		assertPayloadEqual("""
+                <SOAP-ENV:Fault xmlns:SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/' \
+                xmlns:spring='http://www.springframework.org'>\
+                <faultcode>spring:fault</faultcode>\
+                <faultstring xml:lang='en'>\
+                """ + faultString + "</faultstring>" + "<faultactor>" + actor + "</faultactor>"
 				+ "</SOAP-ENV:Fault>");
 	}
 
@@ -148,8 +151,11 @@ public abstract class AbstractSoap11BodyTestCase extends AbstractSoapBodyTestCas
 		transformer.transform(detailContents, detailElement2.getResult());
 
 		assertPayloadEqual(
-				"<SOAP-ENV:Fault xmlns:SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/' xmlns:spring='http://www.springframework.org'>"
-						+ "<faultcode>spring:fault</faultcode>" + "<faultstring>" + faultString + "</faultstring>" + "<detail>"
+				"""
+                        <SOAP-ENV:Fault xmlns:SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/' xmlns:spring='http://www.springframework.org'>\
+                        <faultcode>spring:fault</faultcode>\
+                        <faultstring>\
+                        """ + faultString + "</faultstring>" + "<detail>"
 						+ "<spring:detailEntry xmlns:spring='http://www.springframework.org'><detailContents xmlns='namespace'/></spring:detailEntry>"
 						+ "<spring:detailEntry xmlns:spring='http://www.springframework.org'><detailContents xmlns='namespace'/></spring:detailEntry>"
 						+ "</detail>" + "</SOAP-ENV:Fault>");
@@ -164,9 +170,14 @@ public abstract class AbstractSoap11BodyTestCase extends AbstractSoapBodyTestCas
 		transformer.transform(new StringSource("<detailContents xmlns='namespace'/>"), detail.getResult());
 		transformer.transform(new StringSource("<detailContents xmlns='namespace'/>"), detail.getResult());
 
-		assertPayloadEqual("<SOAP-ENV:Fault xmlns:SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/'>"
-				+ "<faultcode xmlns:prefix='namespace'>prefix:localPart</faultcode>" + "<faultstring>Fault</faultstring>"
-				+ "<detail>" + "<detailContents xmlns='namespace'/>" + "<detailContents xmlns='namespace'/>"
-				+ "</detail></SOAP-ENV:Fault>");
+		assertPayloadEqual("""
+                <SOAP-ENV:Fault xmlns:SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/'>\
+                <faultcode xmlns:prefix='namespace'>prefix:localPart</faultcode>\
+                <faultstring>Fault</faultstring>\
+                <detail>\
+                <detailContents xmlns='namespace'/>\
+                <detailContents xmlns='namespace'/>\
+                </detail></SOAP-ENV:Fault>\
+                """);
 	}
 }

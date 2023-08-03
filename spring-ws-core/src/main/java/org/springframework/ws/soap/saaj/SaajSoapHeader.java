@@ -112,8 +112,8 @@ abstract class SaajSoapHeader extends SaajSoapElement<SOAPHeader> implements Soa
 		@Override
 		public SoapHeaderElement next() {
 			Node saajHeaderElement = iterator.next();
-			if (saajHeaderElement instanceof SOAPHeaderElement) {
-				return new SaajSoapHeaderElement((SOAPHeaderElement) saajHeaderElement);
+			if (saajHeaderElement instanceof SOAPHeaderElement element) {
+				return new SaajSoapHeaderElement(element);
 			} else {
 				throw new RuntimeException("saajHeaderElement is not an instance of SOAPHeaderElement");
 			}

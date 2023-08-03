@@ -86,9 +86,7 @@ public abstract class Wss4jMessageInterceptorSamlTestCase extends Wss4jTestCase 
 		public void handle(Callback[] callbacks) {
 
 			for (Callback value : callbacks) {
-				if (value instanceof SAMLCallback) {
-
-					SAMLCallback callback = (SAMLCallback) value;
+				if (value instanceof SAMLCallback callback) {
 					callback.setSamlVersion(Version.SAML_20);
 					callback.setIssuerCrypto(crypto);
 					callback.setIssuerKeyName("rsaKey");

@@ -641,8 +641,7 @@ public class WebServiceTemplate extends WebServiceAccessor implements WebService
 	protected boolean hasError(WebServiceConnection connection, WebServiceMessage request) throws IOException {
 		if (checkConnectionForError && connection.hasError()) {
 			// could be a fault
-			if (checkConnectionForFault && connection instanceof FaultAwareWebServiceConnection) {
-				FaultAwareWebServiceConnection faultConnection = (FaultAwareWebServiceConnection) connection;
+			if (checkConnectionForFault && connection instanceof FaultAwareWebServiceConnection faultConnection) {
 				return !(faultConnection.hasFault() && request instanceof FaultAwareWebServiceMessage);
 			} else {
 				return true;
@@ -699,16 +698,12 @@ public class WebServiceTemplate extends WebServiceAccessor implements WebService
 	 * @throws IOException in case of I/O errors
 	 */
 	protected boolean hasFault(WebServiceConnection connection, WebServiceMessage response) throws IOException {
-		if (checkConnectionForFault && connection instanceof FaultAwareWebServiceConnection) {
-			// check whether the connection has a fault (i.e. status code 500 in HTTP)
-			FaultAwareWebServiceConnection faultConnection = (FaultAwareWebServiceConnection) connection;
+		if (checkConnectionForFault && connection instanceof FaultAwareWebServiceConnection faultConnection) {
 			if (!faultConnection.hasFault()) {
 				return false;
 			}
 		}
-		if (response instanceof FaultAwareWebServiceMessage) {
-			// either the connection has a fault, or checkConnectionForFault is false: let's verify the fault
-			FaultAwareWebServiceMessage faultMessage = (FaultAwareWebServiceMessage) response;
+		if (response instanceof FaultAwareWebServiceMessage faultMessage) {
 			return faultMessage.hasFault();
 		}
 		return false;

@@ -73,8 +73,7 @@ public class SoapHeaderElementMethodArgumentResolver implements MethodArgumentRe
 		// List<SoapHeaderElement> parameter
 		if (List.class.equals(parameterType)) {
 			Type genericType = parameter.getGenericParameterType();
-			if (genericType instanceof ParameterizedType) {
-				ParameterizedType parameterizedType = (ParameterizedType) genericType;
+			if (genericType instanceof ParameterizedType parameterizedType) {
 				Type[] typeArguments = parameterizedType.getActualTypeArguments();
 				if (typeArguments.length == 1 && SoapHeaderElement.class.equals(typeArguments[0])) {
 					return true;

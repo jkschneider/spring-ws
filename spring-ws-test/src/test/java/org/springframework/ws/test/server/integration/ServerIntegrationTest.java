@@ -50,11 +50,17 @@ public class ServerIntegrationTest {
 	@Test
 	public void basic() {
 
-		Source requestPayload = new StringSource("<customerCountRequest xmlns='http://springframework.org/spring-ws'>"
-				+ "<customerName>John Doe</customerName>" + "</customerCountRequest>");
+		Source requestPayload = new StringSource("""
+                <customerCountRequest xmlns='http://springframework.org/spring-ws'>\
+                <customerName>John Doe</customerName>\
+                </customerCountRequest>\
+                """);
 		Source expectedResponsePayload = new StringSource(
-				"<customerCountResponse xmlns='http://springframework.org/spring-ws'>" + "<customerCount>42</customerCount>"
-						+ "</customerCountResponse>");
+				"""
+                <customerCountResponse xmlns='http://springframework.org/spring-ws'>\
+                <customerCount>42</customerCount>\
+                </customerCountResponse>\
+                """);
 
 		mockClient.sendRequest(withPayload(requestPayload)).andExpect(payload(expectedResponsePayload));
 	}

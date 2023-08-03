@@ -120,8 +120,8 @@ public class SimpleActionEndpointMapping extends AbstractActionEndpointMapping {
 				URI action = entry.getKey();
 				Object endpoint = entry.getValue();
 				// Remove whitespace from endpoint bean name.
-				if (endpoint instanceof String) {
-					endpoint = ((String) endpoint).trim();
+				if (endpoint instanceof String string) {
+					endpoint = string.trim();
 				}
 				registerEndpoint(action, endpoint);
 			}

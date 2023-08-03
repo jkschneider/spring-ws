@@ -62,9 +62,11 @@ public abstract class AbstractSoap12HeaderTestCase extends AbstractSoapHeaderTes
 		transformer.transform(soapHeader.getSource(), result);
 
 		XmlAssert.assertThat(result.toString())
-				.and("<Header xmlns='http://www.w3.org/2003/05/soap-envelope' >"
-						+ "<NotUnderstood qname='spring-ws:NotUnderstood' xmlns:spring-ws='http://www.springframework.org' />"
-						+ "</Header>")
+				.and("""
+                        <Header xmlns='http://www.w3.org/2003/05/soap-envelope' >\
+                        <NotUnderstood qname='spring-ws:NotUnderstood' xmlns:spring-ws='http://www.springframework.org' />\
+                        </Header>\
+                        """)
 				.ignoreWhitespace().areSimilar();
 	}
 

@@ -102,8 +102,8 @@ class MockSenderConnection implements WebServiceConnection, ResponseActions {
 
 	@Override
 	public String getErrorMessage() throws IOException {
-		if (responseCreator instanceof ErrorResponseCreator) {
-			return ((ErrorResponseCreator) responseCreator).getErrorMessage();
+		if (responseCreator instanceof ErrorResponseCreator creator) {
+			return creator.getErrorMessage();
 		} else {
 			return null;
 		}

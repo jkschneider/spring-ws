@@ -54,10 +54,16 @@ public class ClientIntegrationTest {
 	public void basic() {
 
 		Source expectedRequestPayload = new StringSource(
-				"<customerCountRequest xmlns='http://springframework.org/spring-ws'>" + "<customerName>John Doe</customerName>"
-						+ "</customerCountRequest>");
-		Source responsePayload = new StringSource("<customerCountResponse xmlns='http://springframework.org/spring-ws'>"
-				+ "<customerCount>10</customerCount>" + "</customerCountResponse>");
+				"""
+                <customerCountRequest xmlns='http://springframework.org/spring-ws'>\
+                <customerName>John Doe</customerName>\
+                </customerCountRequest>\
+                """);
+		Source responsePayload = new StringSource("""
+                <customerCountResponse xmlns='http://springframework.org/spring-ws'>\
+                <customerCount>10</customerCount>\
+                </customerCountResponse>\
+                """);
 
 		mockServer.expect(payload(expectedRequestPayload)).andRespond(withPayload(responsePayload));
 

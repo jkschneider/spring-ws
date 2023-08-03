@@ -121,10 +121,9 @@ public class SaajXmlReader extends AbstractXmlReader {
 	}
 
 	private void handleNode(Node node) throws SAXException {
-		if (node instanceof SOAPElement) {
-			handleElement((SOAPElement) node);
-		} else if (node instanceof Text) {
-			Text text = (Text) node;
+		if (node instanceof SOAPElement element) {
+			handleElement(element);
+		} else if (node instanceof Text text) {
 			handleText(text);
 		}
 	}

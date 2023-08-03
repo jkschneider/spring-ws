@@ -42,9 +42,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ContextConfiguration("jms-receiver-applicationContext.xml")
 public class WebServiceMessageListenerIntegrationTest {
 
-	private static final String CONTENT = "<SOAP-ENV:Envelope xmlns:SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/'>"
-			+ "<SOAP-ENV:Body>\n" + "<m:GetLastTradePrice xmlns:m='http://www.springframework.org/spring-ws'>\n"
-			+ "<symbol>DIS</symbol>\n" + "</m:GetLastTradePrice>\n" + "</SOAP-ENV:Body></SOAP-ENV:Envelope>";
+	private static final String CONTENT = """
+            <SOAP-ENV:Envelope xmlns:SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/'>\
+            <SOAP-ENV:Body>
+            <m:GetLastTradePrice xmlns:m='http://www.springframework.org/spring-ws'>
+            <symbol>DIS</symbol>
+            </m:GetLastTradePrice>
+            </SOAP-ENV:Body></SOAP-ENV:Envelope>\
+            """;
 
 	@Autowired private JmsTemplate jmsTemplate;
 

@@ -102,8 +102,7 @@ public abstract class AbstractJaxb2PayloadMethodProcessor extends AbstractPayloa
 			logger.debug("Marshalling [" + jaxbElement + "] to response payload");
 		}
 		WebServiceMessage response = messageContext.getResponse();
-		if (response instanceof StreamingWebServiceMessage) {
-			StreamingWebServiceMessage streamingResponse = (StreamingWebServiceMessage) response;
+		if (response instanceof StreamingWebServiceMessage streamingResponse) {
 
 			StreamingPayload payload = new JaxbStreamingPayload(clazz, jaxbElement);
 			streamingResponse.setStreamingPayload(payload);
@@ -176,8 +175,8 @@ public abstract class AbstractJaxb2PayloadMethodProcessor extends AbstractPayloa
 	}
 
 	private JAXBException convertToJaxbException(Exception ex) {
-		if (ex instanceof JAXBException) {
-			return (JAXBException) ex;
+		if (ex instanceof JAXBException exception) {
+			return exception;
 		} else {
 			return new JAXBException(ex);
 		}

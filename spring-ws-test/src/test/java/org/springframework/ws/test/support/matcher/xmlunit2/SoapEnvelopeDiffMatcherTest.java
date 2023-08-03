@@ -35,9 +35,13 @@ public class SoapEnvelopeDiffMatcherTest {
 	@Test
 	public void match() throws Exception {
 
-		String xml = "<?xml version='1.0'?>" + "<soap:Envelope xmlns:soap='http://www.w3.org/2003/05/soap-envelope'>"
-				+ "<soap:Header><header xmlns='http://example.com'/></soap:Header>"
-				+ "<soap:Body><payload xmlns='http://example.com'/></soap:Body>" + "</soap:Envelope>";
+		String xml = """
+                <?xml version='1.0'?>\
+                <soap:Envelope xmlns:soap='http://www.w3.org/2003/05/soap-envelope'>\
+                <soap:Header><header xmlns='http://example.com'/></soap:Header>\
+                <soap:Body><payload xmlns='http://example.com'/></soap:Body>\
+                </soap:Envelope>\
+                """;
 		DOMResult result = new DOMResult();
 		TransformerHelper transformerHelper = new TransformerHelper();
 		transformerHelper.transform(new StringSource(xml), result);
@@ -63,7 +67,7 @@ public class SoapEnvelopeDiffMatcherTest {
 			xmlBuilder.append("<soap:Body><payload%s xmlns='http://example.com'/></soap:Body>");
 			xmlBuilder.append("</soap:Envelope>");
 			String xml = xmlBuilder.toString();
-			String actual = String.format(xml, "1");
+			String actual = xml.formatted("1");
 			DOMResult result = new DOMResult();
 			TransformerHelper transformerHelper = new TransformerHelper();
 			transformerHelper.transform(new StringSource(actual), result);
@@ -71,7 +75,7 @@ public class SoapEnvelopeDiffMatcherTest {
 			expect(message.getDocument()).andReturn((Document) result.getNode()).once();
 			replay(message);
 
-			String expected = String.format(xml, "2");
+			String expected = xml.formatted("2");
 			SoapEnvelopeDiffMatcher matcher = new SoapEnvelopeDiffMatcher(new StringSource(expected));
 			matcher.match(message);
 		});
